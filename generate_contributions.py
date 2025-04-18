@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 
 # Configuration
-TOTAL_COMMITS = 300
+TOTAL_COMMITS = 1200
 DAYS_BACK = 365
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 
