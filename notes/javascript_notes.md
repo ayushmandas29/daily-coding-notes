@@ -1,10 +1,10 @@
-# Javascript - Note #291
+# Javascript - Note #5
 
 ## Key Insight
-Destructuring simplifies object and array extraction
+Map and Set provide specialized data structures
 
 ## Date
-Generated on day 291 of continuous learning.
+Generated on day 5 of continuous learning.
 
 ## Category
 Topic: javascript
