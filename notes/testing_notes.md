@@ -1,10 +1,10 @@
-# Testing - Note #275
+# Testing - Note #15
 
 ## Key Insight
-Mocking isolates units from dependencies
+Snapshot testing catches unintended UI changes
 
 ## Date
-Generated on day 275 of continuous learning.
+Generated on day 15 of continuous learning.
 
 ## Category
 Topic: testing
