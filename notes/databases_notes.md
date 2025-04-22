@@ -1,10 +1,10 @@
-# Databases - Note #278
+# Databases - Note #18
 
 ## Key Insight
-Connection pooling prevents exhaustion
+OLAP handles analytical workloads
 
 ## Date
-Generated on day 278 of continuous learning.
+Generated on day 18 of continuous learning.
 
 ## Category
 Topic: databases
