@@ -1,10 +1,10 @@
-# Cloud - Note #279
+# Cloud - Note #19
 
 ## Key Insight
-IAM controls access to cloud resources
+Serverless scales automatically to zero
 
 ## Date
-Generated on day 279 of continuous learning.
+Generated on day 19 of continuous learning.
 
 ## Category
 Topic: cloud
