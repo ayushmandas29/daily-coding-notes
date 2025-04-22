@@ -1,10 +1,10 @@
-# Performance - Note #277
+# Performance - Note #17
 
 ## Key Insight
-Compression reduces network payload size
+Profiling identifies actual bottlenecks
 
 ## Date
-Generated on day 277 of continuous learning.
+Generated on day 17 of continuous learning.
 
 ## Category
 Topic: performance
