@@ -1,10 +1,10 @@
-# Security - Note #276
+# Security - Note #16
 
 ## Key Insight
-JWT tokens enable stateless authentication
+Principle of least privilege limits access scope
 
 ## Date
-Generated on day 276 of continuous learning.
+Generated on day 16 of continuous learning.
 
 ## Category
 Topic: security
