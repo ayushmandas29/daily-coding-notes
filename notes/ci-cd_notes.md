@@ -1,10 +1,10 @@
-# Ci Cd - Note #281
+# Ci Cd - Note #21
 
 ## Key Insight
-CI runs tests on every commit automatically
+Branch protection enforces review policies
 
 ## Date
-Generated on day 281 of continuous learning.
+Generated on day 21 of continuous learning.
 
 ## Category
 Topic: ci-cd
