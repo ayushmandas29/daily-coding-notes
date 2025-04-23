@@ -1,10 +1,10 @@
-# Devops - Note #280
+# Devops - Note #20
 
 ## Key Insight
-Ansible automates configuration management
+Canary releases reduce deployment risk
 
 ## Date
-Generated on day 280 of continuous learning.
+Generated on day 20 of continuous learning.
 
 ## Category
 Topic: devops
