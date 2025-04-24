@@ -1,10 +1,10 @@
-# Design Patterns - Note #283
+# Design Patterns - Note #23
 
 ## Key Insight
-Observer pattern enables event-driven communication
+Repository pattern abstracts data access
 
 ## Date
-Generated on day 283 of continuous learning.
+Generated on day 23 of continuous learning.
 
 ## Category
 Topic: design-patterns
