@@ -1,10 +1,10 @@
-# Microservices - Note #282
+# Microservices - Note #22
 
 ## Key Insight
-API gateways centralize cross-cutting concerns
+Health checks enable automatic recovery
 
 ## Date
-Generated on day 282 of continuous learning.
+Generated on day 22 of continuous learning.
 
 ## Category
 Topic: microservices
