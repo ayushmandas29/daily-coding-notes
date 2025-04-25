@@ -1,10 +1,10 @@
-# Optimization - Note #286
+# Optimization - Note #26
 
 ## Key Insight
-Denormalization trades consistency for speed
+Measure before optimizing anything
 
 ## Date
-Generated on day 286 of continuous learning.
+Generated on day 26 of continuous learning.
 
 ## Category
 Topic: optimization
