@@ -1,10 +1,10 @@
-# Clean Code - Note #284
+# Clean Code - Note #24
 
 ## Key Insight
-DRY principle reduces code duplication
+Code should be easy to read and modify
 
 ## Date
-Generated on day 284 of continuous learning.
+Generated on day 24 of continuous learning.
 
 ## Category
 Topic: clean-code
