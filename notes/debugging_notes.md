@@ -1,10 +1,10 @@
-# Debugging - Note #285
+# Debugging - Note #25
 
 ## Key Insight
-Stack traces point to error origin
+Reproduce the bug before attempting a fix
 
 ## Date
-Generated on day 285 of continuous learning.
+Generated on day 25 of continuous learning.
 
 ## Category
 Topic: debugging
