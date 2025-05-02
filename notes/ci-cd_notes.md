@@ -1,10 +1,10 @@
-# Ci Cd - Note #21
+# Ci Cd - Note #47
 
 ## Key Insight
-Branch protection enforces review policies
+Feature flags decouple deploy from release
 
 ## Date
-Generated on day 21 of continuous learning.
+Generated on day 47 of continuous learning.
 
 ## Category
 Topic: ci-cd
