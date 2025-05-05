@@ -1,10 +1,10 @@
-# Docker - Note #32
+# Docker - Note #58
 
 ## Key Insight
-Alpine base images minimize attack surface
+Docker layers are cached for faster rebuilds
 
 ## Date
-Generated on day 32 of continuous learning.
+Generated on day 58 of continuous learning.
 
 ## Category
 Topic: docker
