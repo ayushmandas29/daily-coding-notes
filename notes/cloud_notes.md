@@ -1,10 +1,10 @@
-# Cloud - Note #45
+# Cloud - Note #71
 
 ## Key Insight
-Object storage handles unstructured data
+IAM controls access to cloud resources
 
 ## Date
-Generated on day 45 of continuous learning.
+Generated on day 71 of continuous learning.
 
 ## Category
 Topic: cloud
