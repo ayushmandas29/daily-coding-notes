@@ -1,10 +1,10 @@
-# Devops - Note #46
+# Devops - Note #72
 
 ## Key Insight
-Log aggregation centralizes troubleshooting
+Ansible automates configuration management
 
 ## Date
-Generated on day 46 of continuous learning.
+Generated on day 72 of continuous learning.
 
 ## Category
 Topic: devops
