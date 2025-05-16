@@ -1,10 +1,10 @@
-# Devops - Note #72
+# Devops - Note #98
 
 ## Key Insight
-Ansible automates configuration management
+GitOps uses git as single source of truth
 
 ## Date
-Generated on day 72 of continuous learning.
+Generated on day 98 of continuous learning.
 
 ## Category
 Topic: devops
