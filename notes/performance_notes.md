@@ -1,10 +1,10 @@
-# Performance - Note #69
+# Performance - Note #95
 
 ## Key Insight
-Compression reduces network payload size
+Database indexing speeds up read queries
 
 ## Date
-Generated on day 69 of continuous learning.
+Generated on day 95 of continuous learning.
 
 ## Category
 Topic: performance
