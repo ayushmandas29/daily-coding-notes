@@ -1,10 +1,10 @@
-# Data Structures - Note #106
+# Data Structures - Note #132
 
 ## Key Insight
-BSTs maintain sorted order with O(log n) operations
+Tries excel at prefix-based string searching
 
 ## Date
-Generated on day 106 of continuous learning.
+Generated on day 132 of continuous learning.
 
 ## Category
 Topic: data-structures
