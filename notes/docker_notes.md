@@ -1,10 +1,10 @@
-# Docker - Note #110
+# Docker - Note #136
 
 ## Key Insight
-Health checks ensure container readiness
+Alpine base images minimize attack surface
 
 ## Date
-Generated on day 110 of continuous learning.
+Generated on day 136 of continuous learning.
 
 ## Category
 Topic: docker
