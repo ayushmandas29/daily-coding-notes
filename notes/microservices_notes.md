@@ -1,10 +1,10 @@
-# Microservices - Note #152
+# Microservices - Note #178
 
 ## Key Insight
-Contract testing validates service interfaces
+API gateways centralize cross-cutting concerns
 
 ## Date
-Generated on day 152 of continuous learning.
+Generated on day 178 of continuous learning.
 
 ## Category
 Topic: microservices
