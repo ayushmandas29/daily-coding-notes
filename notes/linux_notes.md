@@ -1,10 +1,10 @@
-# Linux - Note #168
+# Linux - Note #194
 
 ## Key Insight
-systemd manages services and daemons
+awk processes columnar data efficiently
 
 ## Date
-Generated on day 168 of continuous learning.
+Generated on day 194 of continuous learning.
 
 ## Category
 Topic: linux
