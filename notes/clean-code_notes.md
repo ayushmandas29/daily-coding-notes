@@ -1,10 +1,10 @@
-# Clean Code - Note #180
+# Clean Code - Note #206
 
 ## Key Insight
-DRY principle reduces code duplication
+Composition is often preferred over inheritance
 
 ## Date
-Generated on day 180 of continuous learning.
+Generated on day 206 of continuous learning.
 
 ## Category
 Topic: clean-code
