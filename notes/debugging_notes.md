@@ -1,10 +1,10 @@
-# Debugging - Note #207
+# Debugging - Note #233
 
 ## Key Insight
-Memory profilers detect leaks and bloat
+Reproduce the bug before attempting a fix
 
 ## Date
-Generated on day 207 of continuous learning.
+Generated on day 233 of continuous learning.
 
 ## Category
 Topic: debugging
