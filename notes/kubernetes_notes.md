@@ -1,10 +1,10 @@
-# Kubernetes - Note #215
+# Kubernetes - Note #241
 
 ## Key Insight
-Readiness probes control traffic routing
+Pods are the smallest deployable units in K8s
 
 ## Date
-Generated on day 215 of continuous learning.
+Generated on day 241 of continuous learning.
 
 ## Category
 Topic: kubernetes
