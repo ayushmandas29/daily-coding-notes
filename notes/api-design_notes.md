@@ -1,10 +1,10 @@
-# Api Design - Note #222
+# Api Design - Note #248
 
 ## Key Insight
-GraphQL lets clients request specific data
+Idempotent endpoints are safe for retries
 
 ## Date
-Generated on day 222 of continuous learning.
+Generated on day 248 of continuous learning.
 
 ## Category
 Topic: api-design
