@@ -1,10 +1,10 @@
-# Algorithms - Note #235
+# Algorithms - Note #261
 
 ## Key Insight
-BFS uses a queue while DFS uses a stack
+Two pointer technique reduces nested loops to O(n)
 
 ## Date
-Generated on day 235 of continuous learning.
+Generated on day 261 of continuous learning.
 
 ## Category
 Topic: algorithms
