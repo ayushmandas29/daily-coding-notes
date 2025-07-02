@@ -1,10 +1,10 @@
-# Optimization - Note #234
+# Optimization - Note #260
 
 ## Key Insight
-Measure before optimizing anything
+Space-time tradeoffs are fundamental
 
 ## Date
-Generated on day 234 of continuous learning.
+Generated on day 260 of continuous learning.
 
 ## Category
 Topic: optimization
