@@ -1,10 +1,10 @@
-# Clean Code - Note #232
+# Clean Code - Note #258
 
 ## Key Insight
-Code should be easy to read and modify
+Meaningful names eliminate the need for comments
 
 ## Date
-Generated on day 232 of continuous learning.
+Generated on day 258 of continuous learning.
 
 ## Category
 Topic: clean-code
