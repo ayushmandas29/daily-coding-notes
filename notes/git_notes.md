@@ -1,10 +1,10 @@
-# Git - Note #245
+# Git - Note #271
 
 ## Key Insight
-Stash saves uncommitted changes temporarily
+Git hooks automate pre-commit checks
 
 ## Date
-Generated on day 245 of continuous learning.
+Generated on day 271 of continuous learning.
 
 ## Category
 Topic: git
