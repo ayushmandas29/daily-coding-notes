@@ -1,10 +1,10 @@
-# Api Design - Note #40
+# Api Design - Note #66
 
 ## Key Insight
-Idempotent endpoints are safe for retries
+Pagination prevents overwhelming API responses
 
 ## Date
-Generated on day 40 of continuous learning.
+Generated on day 66 of continuous learning.
 
 ## Category
 Topic: api-design
