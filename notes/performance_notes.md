@@ -1,10 +1,10 @@
-# Performance - Note #43
+# Performance - Note #69
 
 ## Key Insight
-Connection pooling reuses database connections
+Compression reduces network payload size
 
 ## Date
-Generated on day 43 of continuous learning.
+Generated on day 69 of continuous learning.
 
 ## Category
 Topic: performance
