@@ -1,10 +1,10 @@
-# Kubernetes - Note #293
+# Kubernetes - Note #319
 
 ## Key Insight
-Namespaces isolate cluster resources
+Readiness probes control traffic routing
 
 ## Date
-Generated on day 293 of continuous learning.
+Generated on day 319 of continuous learning.
 
 ## Category
 Topic: kubernetes
