@@ -1,10 +1,10 @@
-# Javascript - Note #343
+# Javascript - Note #369
 
 ## Key Insight
-Spread operator creates shallow copies of arrays
+Promises handle asynchronous operations cleanly
 
 ## Date
-Generated on day 343 of continuous learning.
+Generated on day 369 of continuous learning.
 
 ## Category
 Topic: javascript
