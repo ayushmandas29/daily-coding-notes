@@ -1,10 +1,10 @@
-# Deep Learning - Note #347
+# Deep Learning - Note #373
 
 ## Key Insight
-Learning rate scheduling improves convergence
+Attention mechanism captures long-range dependencies
 
 ## Date
-Generated on day 347 of continuous learning.
+Generated on day 373 of continuous learning.
 
 ## Category
 Topic: deep-learning
