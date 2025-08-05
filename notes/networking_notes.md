@@ -1,10 +1,10 @@
-# Networking - Note #351
+# Networking - Note #377
 
 ## Key Insight
-IPv6 provides a much larger address space
+TCP ensures reliable ordered data delivery
 
 ## Date
-Generated on day 351 of continuous learning.
+Generated on day 377 of continuous learning.
 
 ## Category
 Topic: networking
