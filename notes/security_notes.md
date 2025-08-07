@@ -1,10 +1,10 @@
-# Security - Note #354
+# Security - Note #380
 
 ## Key Insight
-Input validation prevents injection attacks
+JWT tokens enable stateless authentication
 
 ## Date
-Generated on day 354 of continuous learning.
+Generated on day 380 of continuous learning.
 
 ## Category
 Topic: security
