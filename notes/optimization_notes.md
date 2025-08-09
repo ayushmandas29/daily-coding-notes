@@ -1,10 +1,10 @@
-# Optimization - Note #364
+# Optimization - Note #390
 
 ## Key Insight
-Space-time tradeoffs are fundamental
+Denormalization trades consistency for speed
 
 ## Date
-Generated on day 364 of continuous learning.
+Generated on day 390 of continuous learning.
 
 ## Category
 Topic: optimization
