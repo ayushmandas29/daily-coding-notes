@@ -1,10 +1,10 @@
-# System Design - Note #367
+# System Design - Note #393
 
 ## Key Insight
-Rate limiting protects APIs from abuse
+CAP theorem: choose 2 of consistency, availability, partition tolerance
 
 ## Date
-Generated on day 367 of continuous learning.
+Generated on day 393 of continuous learning.
 
 ## Category
 Topic: system-design
