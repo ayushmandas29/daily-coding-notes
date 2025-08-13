@@ -1,10 +1,10 @@
-# Databases - Note #382
+# Databases - Note #408
 
 ## Key Insight
-Connection pooling prevents exhaustion
+Write-ahead logging ensures durability
 
 ## Date
-Generated on day 382 of continuous learning.
+Generated on day 408 of continuous learning.
 
 ## Category
 Topic: databases
