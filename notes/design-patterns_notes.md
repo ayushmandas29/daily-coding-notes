@@ -1,10 +1,10 @@
-# Design Patterns - Note #387
+# Design Patterns - Note #413
 
 ## Key Insight
-Observer pattern enables event-driven communication
+Decorator pattern adds behavior dynamically
 
 ## Date
-Generated on day 387 of continuous learning.
+Generated on day 413 of continuous learning.
 
 ## Category
 Topic: design-patterns
