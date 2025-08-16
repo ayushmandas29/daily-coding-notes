@@ -1,10 +1,10 @@
-# Python - Note #394
+# Python - Note #420
 
 ## Key Insight
-Context managers handle resource cleanup automatically
+Decorators add functionality without modifying functions
 
 ## Date
-Generated on day 394 of continuous learning.
+Generated on day 420 of continuous learning.
 
 ## Category
 Topic: python
