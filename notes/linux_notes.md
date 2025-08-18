@@ -1,10 +1,10 @@
-# Linux - Note #402
+# Linux - Note #428
 
 ## Key Insight
-awk processes columnar data efficiently
+cron schedules recurring tasks automatically
 
 ## Date
-Generated on day 402 of continuous learning.
+Generated on day 428 of continuous learning.
 
 ## Category
 Topic: linux
