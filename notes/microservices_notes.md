@@ -1,10 +1,10 @@
-# Microservices - Note #412
+# Microservices - Note #438
 
 ## Key Insight
-Event sourcing captures state changes as events
+Health checks enable automatic recovery
 
 ## Date
-Generated on day 412 of continuous learning.
+Generated on day 438 of continuous learning.
 
 ## Category
 Topic: microservices
