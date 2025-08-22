@@ -1,10 +1,10 @@
-# Algorithms - Note #417
+# Algorithms - Note #443
 
 ## Key Insight
-Binary search runs in O(log n) time complexity
+BFS uses a queue while DFS uses a stack
 
 ## Date
-Generated on day 417 of continuous learning.
+Generated on day 443 of continuous learning.
 
 ## Category
 Topic: algorithms
