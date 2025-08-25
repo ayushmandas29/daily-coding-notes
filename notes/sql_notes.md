@@ -1,10 +1,10 @@
-# Sql - Note #426
+# Sql - Note #452
 
 ## Key Insight
-EXPLAIN ANALYZE reveals query execution plans
+Window functions compute across related rows
 
 ## Date
-Generated on day 426 of continuous learning.
+Generated on day 452 of continuous learning.
 
 ## Category
 Topic: sql
