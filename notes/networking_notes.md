@@ -1,10 +1,10 @@
-# Networking - Note #429
+# Networking - Note #455
 
 ## Key Insight
-REST uses standard HTTP methods for APIs
+IPv6 provides a much larger address space
 
 ## Date
-Generated on day 429 of continuous learning.
+Generated on day 455 of continuous learning.
 
 ## Category
 Topic: networking
