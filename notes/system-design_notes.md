@@ -1,10 +1,10 @@
-# System Design - Note #445
+# System Design - Note #471
 
 ## Key Insight
-Message queues decouple system components
+Rate limiting protects APIs from abuse
 
 ## Date
-Generated on day 445 of continuous learning.
+Generated on day 471 of continuous learning.
 
 ## Category
 Topic: system-design
