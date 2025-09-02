@@ -1,10 +1,10 @@
-# Sql - Note #452
+# Sql - Note #478
 
 ## Key Insight
-Window functions compute across related rows
+Normalization reduces data redundancy
 
 ## Date
-Generated on day 452 of continuous learning.
+Generated on day 478 of continuous learning.
 
 ## Category
 Topic: sql
