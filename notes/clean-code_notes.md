@@ -1,10 +1,10 @@
-# Clean Code - Note #466
+# Clean Code - Note #492
 
 ## Key Insight
-Meaningful names eliminate the need for comments
+DRY principle reduces code duplication
 
 ## Date
-Generated on day 466 of continuous learning.
+Generated on day 492 of continuous learning.
 
 ## Category
 Topic: clean-code
