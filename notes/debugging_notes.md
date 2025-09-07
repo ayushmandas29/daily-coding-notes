@@ -1,10 +1,10 @@
-# Debugging - Note #467
+# Debugging - Note #493
 
 ## Key Insight
-Logging is more powerful than print statements
+Stack traces point to error origin
 
 ## Date
-Generated on day 467 of continuous learning.
+Generated on day 493 of continuous learning.
 
 ## Category
 Topic: debugging
