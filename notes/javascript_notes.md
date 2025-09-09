@@ -1,10 +1,10 @@
-# Javascript - Note #473
+# Javascript - Note #499
 
 ## Key Insight
-Promises handle asynchronous operations cleanly
+Destructuring simplifies object and array extraction
 
 ## Date
-Generated on day 473 of continuous learning.
+Generated on day 499 of continuous learning.
 
 ## Category
 Topic: javascript
