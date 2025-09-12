@@ -1,10 +1,10 @@
-# Testing - Note #483
+# Testing - Note #509
 
 ## Key Insight
-Mocking isolates units from dependencies
+TDD writes tests before implementation
 
 ## Date
-Generated on day 483 of continuous learning.
+Generated on day 509 of continuous learning.
 
 ## Category
 Topic: testing
