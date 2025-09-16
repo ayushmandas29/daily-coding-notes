@@ -1,10 +1,10 @@
-# Algorithms - Note #495
+# Algorithms - Note #521
 
 ## Key Insight
-Topological sort works only on DAGs
+Binary search runs in O(log n) time complexity
 
 ## Date
-Generated on day 495 of continuous learning.
+Generated on day 521 of continuous learning.
 
 ## Category
 Topic: algorithms
