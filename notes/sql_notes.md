@@ -1,10 +1,10 @@
-# Sql - Note #504
+# Sql - Note #530
 
 ## Key Insight
-Partitioning improves performance on large tables
+EXPLAIN ANALYZE reveals query execution plans
 
 ## Date
-Generated on day 504 of continuous learning.
+Generated on day 530 of continuous learning.
 
 ## Category
 Topic: sql
