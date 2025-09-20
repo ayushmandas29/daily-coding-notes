@@ -1,10 +1,10 @@
-# Devops - Note #514
+# Devops - Note #540
 
 ## Key Insight
-GitOps uses git as single source of truth
+Canary releases reduce deployment risk
 
 ## Date
-Generated on day 514 of continuous learning.
+Generated on day 540 of continuous learning.
 
 ## Category
 Topic: devops
