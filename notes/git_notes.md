@@ -1,10 +1,10 @@
-# Git - Note #531
+# Git - Note #557
 
 ## Key Insight
-Interactive rebase allows squashing commits
+Stash saves uncommitted changes temporarily
 
 ## Date
-Generated on day 531 of continuous learning.
+Generated on day 557 of continuous learning.
 
 ## Category
 Topic: git
