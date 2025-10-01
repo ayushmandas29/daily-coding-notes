@@ -1,10 +1,10 @@
-# Data Structures - Note #548
+# Data Structures - Note #574
 
 ## Key Insight
-Tries excel at prefix-based string searching
+Stacks follow LIFO while queues follow FIFO
 
 ## Date
-Generated on day 548 of continuous learning.
+Generated on day 574 of continuous learning.
 
 ## Category
 Topic: data-structures
