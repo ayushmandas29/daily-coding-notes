@@ -1,10 +1,10 @@
-# Machine Learning - Note #554
+# Machine Learning - Note #580
 
 ## Key Insight
-Feature scaling improves gradient descent convergence
+Confusion matrices show classification performance
 
 ## Date
-Generated on day 554 of continuous learning.
+Generated on day 580 of continuous learning.
 
 ## Category
 Topic: machine-learning
