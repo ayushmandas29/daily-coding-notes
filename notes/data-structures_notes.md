@@ -1,10 +1,10 @@
-# Data Structures - Note #574
+# Data Structures - Note #600
 
 ## Key Insight
-Stacks follow LIFO while queues follow FIFO
+Red-black trees guarantee O(log n) worst case
 
 ## Date
-Generated on day 574 of continuous learning.
+Generated on day 600 of continuous learning.
 
 ## Category
 Topic: data-structures
