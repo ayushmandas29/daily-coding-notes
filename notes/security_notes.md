@@ -1,10 +1,10 @@
-# Security - Note #588
+# Security - Note #614
 
 ## Key Insight
-JWT tokens enable stateless authentication
+CSP headers prevent cross-site scripting
 
 ## Date
-Generated on day 588 of continuous learning.
+Generated on day 614 of continuous learning.
 
 ## Category
 Topic: security
