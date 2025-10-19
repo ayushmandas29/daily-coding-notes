@@ -1,10 +1,10 @@
-# System Design - Note #601
+# System Design - Note #627
 
 ## Key Insight
-CAP theorem: choose 2 of consistency, availability, partition tolerance
+Caching reduces database load and latency
 
 ## Date
-Generated on day 601 of continuous learning.
+Generated on day 627 of continuous learning.
 
 ## Category
 Topic: system-design
