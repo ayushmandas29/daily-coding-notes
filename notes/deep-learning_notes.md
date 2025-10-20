@@ -1,10 +1,10 @@
-# Deep Learning - Note #607
+# Deep Learning - Note #633
 
 ## Key Insight
-Data augmentation increases effective dataset size
+Batch normalization stabilizes training
 
 ## Date
-Generated on day 607 of continuous learning.
+Generated on day 633 of continuous learning.
 
 ## Category
 Topic: deep-learning
