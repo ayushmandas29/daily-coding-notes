@@ -1,10 +1,10 @@
-# Cloud - Note #617
+# Cloud - Note #643
 
 ## Key Insight
-IaaS provides virtual infrastructure
+Serverless scales automatically to zero
 
 ## Date
-Generated on day 617 of continuous learning.
+Generated on day 643 of continuous learning.
 
 ## Category
 Topic: cloud
