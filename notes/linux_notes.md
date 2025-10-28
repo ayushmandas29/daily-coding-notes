@@ -1,10 +1,10 @@
-# Linux - Note #636
+# Linux - Note #662
 
 ## Key Insight
-cron schedules recurring tasks automatically
+top monitors real-time system processes
 
 ## Date
-Generated on day 636 of continuous learning.
+Generated on day 662 of continuous learning.
 
 ## Category
 Topic: linux
