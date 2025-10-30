@@ -1,10 +1,10 @@
-# Linux - Note #142
+# Linux - Note #168
 
 ## Key Insight
-top monitors real-time system processes
+systemd manages services and daemons
 
 ## Date
-Generated on day 142 of continuous learning.
+Generated on day 168 of continuous learning.
 
 ## Category
 Topic: linux
