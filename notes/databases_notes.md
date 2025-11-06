@@ -1,10 +1,10 @@
-# Databases - Note #668
+# Databases - Note #694
 
 ## Key Insight
-MongoDB stores flexible JSON documents
+Connection pooling prevents exhaustion
 
 ## Date
-Generated on day 668 of continuous learning.
+Generated on day 694 of continuous learning.
 
 ## Category
 Topic: databases
