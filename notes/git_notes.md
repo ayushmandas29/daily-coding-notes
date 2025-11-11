@@ -1,10 +1,10 @@
-# Git - Note #687
+# Git - Note #713
 
 ## Key Insight
-Git hooks automate pre-commit checks
+Rebase creates a linear commit history
 
 ## Date
-Generated on day 687 of continuous learning.
+Generated on day 713 of continuous learning.
 
 ## Category
 Topic: git
