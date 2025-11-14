@@ -1,10 +1,10 @@
-# Design Patterns - Note #153
+# Design Patterns - Note #179
 
 ## Key Insight
-Singleton ensures only one instance exists
+Observer pattern enables event-driven communication
 
 ## Date
-Generated on day 153 of continuous learning.
+Generated on day 179 of continuous learning.
 
 ## Category
 Topic: design-patterns
