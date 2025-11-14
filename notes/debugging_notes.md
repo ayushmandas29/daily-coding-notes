@@ -1,10 +1,10 @@
-# Debugging - Note #701
+# Debugging - Note #727
 
 ## Key Insight
-Stack traces point to error origin
+Memory profilers detect leaks and bloat
 
 ## Date
-Generated on day 701 of continuous learning.
+Generated on day 727 of continuous learning.
 
 ## Category
 Topic: debugging
