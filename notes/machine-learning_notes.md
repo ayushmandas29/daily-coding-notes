@@ -1,10 +1,10 @@
-# Machine Learning - Note #710
+# Machine Learning - Note #736
 
 ## Key Insight
-Ensemble methods combine multiple weak learners
+Feature importance helps with model interpretability
 
 ## Date
-Generated on day 710 of continuous learning.
+Generated on day 736 of continuous learning.
 
 ## Category
 Topic: machine-learning
