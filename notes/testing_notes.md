@@ -1,10 +1,10 @@
-# Testing - Note #717
+# Testing - Note #743
 
 ## Key Insight
-TDD writes tests before implementation
+Snapshot testing catches unintended UI changes
 
 ## Date
-Generated on day 717 of continuous learning.
+Generated on day 743 of continuous learning.
 
 ## Category
 Topic: testing
