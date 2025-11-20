@@ -1,10 +1,10 @@
-# Design Patterns - Note #725
+# Design Patterns - Note #751
 
 ## Key Insight
-Decorator pattern adds behavior dynamically
+Repository pattern abstracts data access
 
 ## Date
-Generated on day 725 of continuous learning.
+Generated on day 751 of continuous learning.
 
 ## Category
 Topic: design-patterns
