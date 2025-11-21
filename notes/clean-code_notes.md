@@ -1,10 +1,10 @@
-# Clean Code - Note #726
+# Clean Code - Note #752
 
 ## Key Insight
-Composition is often preferred over inheritance
+Code should be easy to read and modify
 
 ## Date
-Generated on day 726 of continuous learning.
+Generated on day 752 of continuous learning.
 
 ## Category
 Topic: clean-code
