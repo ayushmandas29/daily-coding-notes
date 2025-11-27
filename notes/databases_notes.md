@@ -1,10 +1,10 @@
-# Databases - Note #746
+# Databases - Note #772
 
 ## Key Insight
-OLAP handles analytical workloads
+MongoDB stores flexible JSON documents
 
 ## Date
-Generated on day 746 of continuous learning.
+Generated on day 772 of continuous learning.
 
 ## Category
 Topic: databases
