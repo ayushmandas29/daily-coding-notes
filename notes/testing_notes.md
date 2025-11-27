@@ -1,10 +1,10 @@
-# Testing - Note #743
+# Testing - Note #769
 
 ## Key Insight
-Snapshot testing catches unintended UI changes
+Unit tests verify individual components
 
 ## Date
-Generated on day 743 of continuous learning.
+Generated on day 769 of continuous learning.
 
 ## Category
 Topic: testing
