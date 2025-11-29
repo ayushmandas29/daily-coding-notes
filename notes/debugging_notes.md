@@ -1,10 +1,10 @@
-# Debugging - Note #753
+# Debugging - Note #779
 
 ## Key Insight
-Reproduce the bug before attempting a fix
+Logging is more powerful than print statements
 
 ## Date
-Generated on day 753 of continuous learning.
+Generated on day 779 of continuous learning.
 
 ## Category
 Topic: debugging
