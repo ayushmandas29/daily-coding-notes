@@ -1,10 +1,10 @@
-# Optimization - Note #806
+# Optimization - Note #832
 
 ## Key Insight
-Denormalization trades consistency for speed
+Vectorized operations beat scalar loops
 
 ## Date
-Generated on day 806 of continuous learning.
+Generated on day 832 of continuous learning.
 
 ## Category
 Topic: optimization
