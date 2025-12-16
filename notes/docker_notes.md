@@ -1,10 +1,10 @@
-# Docker - Note #812
+# Docker - Note #838
 
 ## Key Insight
-Run containers as non-root for security
+Health checks ensure container readiness
 
 ## Date
-Generated on day 812 of continuous learning.
+Generated on day 838 of continuous learning.
 
 ## Category
 Topic: docker
