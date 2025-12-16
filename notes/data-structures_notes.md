@@ -1,10 +1,10 @@
-# Data Structures - Note #808
+# Data Structures - Note #834
 
 ## Key Insight
-Red-black trees guarantee O(log n) worst case
+BSTs maintain sorted order with O(log n) operations
 
 ## Date
-Generated on day 808 of continuous learning.
+Generated on day 834 of continuous learning.
 
 ## Category
 Topic: data-structures
