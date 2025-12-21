@@ -1,10 +1,10 @@
-# Python - Note #836
+# Python - Note #862
 
 ## Key Insight
-Decorators add functionality without modifying functions
+dataclasses reduce boilerplate for data containers
 
 ## Date
-Generated on day 836 of continuous learning.
+Generated on day 862 of continuous learning.
 
 ## Category
 Topic: python
