@@ -1,10 +1,10 @@
-# Machine Learning - Note #840
+# Machine Learning - Note #866
 
 ## Key Insight
-Feature importance helps with model interpretability
+Feature scaling improves gradient descent convergence
 
 ## Date
-Generated on day 840 of continuous learning.
+Generated on day 866 of continuous learning.
 
 ## Category
 Topic: machine-learning
