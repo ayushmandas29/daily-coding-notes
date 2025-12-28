@@ -1,10 +1,10 @@
-# Design Patterns - Note #855
+# Design Patterns - Note #881
 
 ## Key Insight
-Repository pattern abstracts data access
+Singleton ensures only one instance exists
 
 ## Date
-Generated on day 855 of continuous learning.
+Generated on day 881 of continuous learning.
 
 ## Category
 Topic: design-patterns
