@@ -1,10 +1,10 @@
-# Testing - Note #873
+# Testing - Note #899
 
 ## Key Insight
-Unit tests verify individual components
+Mocking isolates units from dependencies
 
 ## Date
-Generated on day 873 of continuous learning.
+Generated on day 899 of continuous learning.
 
 ## Category
 Topic: testing
