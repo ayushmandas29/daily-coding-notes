@@ -1,10 +1,10 @@
-# Kubernetes - Note #891
+# Kubernetes - Note #917
 
 ## Key Insight
-ConfigMaps externalize configuration from containers
+Namespaces isolate cluster resources
 
 ## Date
-Generated on day 891 of continuous learning.
+Generated on day 917 of continuous learning.
 
 ## Category
 Topic: kubernetes
