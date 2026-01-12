@@ -1,10 +1,10 @@
-# Deep Learning - Note #893
+# Deep Learning - Note #919
 
 ## Key Insight
-Attention mechanism captures long-range dependencies
+Data augmentation increases effective dataset size
 
 ## Date
-Generated on day 893 of continuous learning.
+Generated on day 919 of continuous learning.
 
 ## Category
 Topic: deep-learning
