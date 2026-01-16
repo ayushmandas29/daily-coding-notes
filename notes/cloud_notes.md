@@ -1,10 +1,10 @@
-# Cloud - Note #903
+# Cloud - Note #929
 
 ## Key Insight
-IAM controls access to cloud resources
+IaaS provides virtual infrastructure
 
 ## Date
-Generated on day 903 of continuous learning.
+Generated on day 929 of continuous learning.
 
 ## Category
 Topic: cloud
