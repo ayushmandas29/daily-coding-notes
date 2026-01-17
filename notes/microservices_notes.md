@@ -1,10 +1,10 @@
-# Microservices - Note #906
+# Microservices - Note #932
 
 ## Key Insight
-API gateways centralize cross-cutting concerns
+Event sourcing captures state changes as events
 
 ## Date
-Generated on day 906 of continuous learning.
+Generated on day 932 of continuous learning.
 
 ## Category
 Topic: microservices
