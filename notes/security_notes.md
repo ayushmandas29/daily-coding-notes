@@ -1,10 +1,10 @@
-# Security - Note #926
+# Security - Note #952
 
 ## Key Insight
-CSP headers prevent cross-site scripting
+Principle of least privilege limits access scope
 
 ## Date
-Generated on day 926 of continuous learning.
+Generated on day 952 of continuous learning.
 
 ## Category
 Topic: security
