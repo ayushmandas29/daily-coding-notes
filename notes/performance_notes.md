@@ -1,10 +1,10 @@
-# Performance - Note #927
+# Performance - Note #953
 
 ## Key Insight
-Database indexing speeds up read queries
+Profiling identifies actual bottlenecks
 
 ## Date
-Generated on day 927 of continuous learning.
+Generated on day 953 of continuous learning.
 
 ## Category
 Topic: performance
