@@ -1,10 +1,10 @@
-# Databases - Note #928
+# Databases - Note #954
 
 ## Key Insight
-Write-ahead logging ensures durability
+OLAP handles analytical workloads
 
 ## Date
-Generated on day 928 of continuous learning.
+Generated on day 954 of continuous learning.
 
 ## Category
 Topic: databases
