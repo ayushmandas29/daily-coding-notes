@@ -1,10 +1,10 @@
-# Performance - Note #953
+# Performance - Note #979
 
 ## Key Insight
-Profiling identifies actual bottlenecks
+Connection pooling reuses database connections
 
 ## Date
-Generated on day 953 of continuous learning.
+Generated on day 979 of continuous learning.
 
 ## Category
 Topic: performance
