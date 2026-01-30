@@ -1,10 +1,10 @@
-# Security - Note #224
+# Security - Note #250
 
 ## Key Insight
-Principle of least privilege limits access scope
+Input validation prevents injection attacks
 
 ## Date
-Generated on day 224 of continuous learning.
+Generated on day 250 of continuous learning.
 
 ## Category
 Topic: security
