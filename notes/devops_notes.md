@@ -1,10 +1,10 @@
-# Devops - Note #956
+# Devops - Note #982
 
 ## Key Insight
-Canary releases reduce deployment risk
+Log aggregation centralizes troubleshooting
 
 ## Date
-Generated on day 956 of continuous learning.
+Generated on day 982 of continuous learning.
 
 ## Category
 Topic: devops
