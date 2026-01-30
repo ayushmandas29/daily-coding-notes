@@ -1,10 +1,10 @@
-# Cloud - Note #955
+# Cloud - Note #981
 
 ## Key Insight
-Serverless scales automatically to zero
+Object storage handles unstructured data
 
 ## Date
-Generated on day 955 of continuous learning.
+Generated on day 981 of continuous learning.
 
 ## Category
 Topic: cloud
