@@ -1,10 +1,10 @@
-# Kubernetes - Note #969
+# Kubernetes - Note #995
 
 ## Key Insight
-Pods are the smallest deployable units in K8s
+ConfigMaps externalize configuration from containers
 
 ## Date
-Generated on day 969 of continuous learning.
+Generated on day 995 of continuous learning.
 
 ## Category
 Topic: kubernetes
