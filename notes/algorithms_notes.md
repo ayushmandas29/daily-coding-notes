@@ -1,10 +1,10 @@
-# Algorithms - Note #989
+# Algorithms - Note #1015
 
 ## Key Insight
-Two pointer technique reduces nested loops to O(n)
+Topological sort works only on DAGs
 
 ## Date
-Generated on day 989 of continuous learning.
+Generated on day 1015 of continuous learning.
 
 ## Category
 Topic: algorithms
