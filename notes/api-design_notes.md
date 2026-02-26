@@ -1,10 +1,10 @@
-# Api Design - Note #1028
+# Api Design - Note #1054
 
 ## Key Insight
-Rate limiting protects API availability
+GraphQL lets clients request specific data
 
 ## Date
-Generated on day 1028 of continuous learning.
+Generated on day 1054 of continuous learning.
 
 ## Category
 Topic: api-design
