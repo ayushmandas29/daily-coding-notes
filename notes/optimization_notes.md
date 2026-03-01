@@ -1,10 +1,10 @@
-# Optimization - Note #1040
+# Optimization - Note #1066
 
 ## Key Insight
-Vectorized operations beat scalar loops
+Measure before optimizing anything
 
 ## Date
-Generated on day 1040 of continuous learning.
+Generated on day 1066 of continuous learning.
 
 ## Category
 Topic: optimization
