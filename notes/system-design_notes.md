@@ -1,10 +1,10 @@
-# System Design - Note #1043
+# System Design - Note #1069
 
 ## Key Insight
-Caching reduces database load and latency
+Message queues decouple system components
 
 ## Date
-Generated on day 1043 of continuous learning.
+Generated on day 1069 of continuous learning.
 
 ## Category
 Topic: system-design
