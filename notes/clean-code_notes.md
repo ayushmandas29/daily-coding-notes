@@ -1,10 +1,10 @@
-# Clean Code - Note #1064
+# Clean Code - Note #1090
 
 ## Key Insight
-Code should be easy to read and modify
+Meaningful names eliminate the need for comments
 
 ## Date
-Generated on day 1064 of continuous learning.
+Generated on day 1090 of continuous learning.
 
 ## Category
 Topic: clean-code
