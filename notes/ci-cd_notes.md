@@ -1,10 +1,10 @@
-# Ci Cd - Note #1087
+# Ci Cd - Note #1113
 
 ## Key Insight
-Feature flags decouple deploy from release
+CI runs tests on every commit automatically
 
 ## Date
-Generated on day 1087 of continuous learning.
+Generated on day 1113 of continuous learning.
 
 ## Category
 Topic: ci-cd
