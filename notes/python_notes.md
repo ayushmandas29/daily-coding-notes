@@ -1,10 +1,10 @@
-# Python - Note #1096
+# Python - Note #1122
 
 ## Key Insight
-Type hints improve code readability and IDE support
+Context managers handle resource cleanup automatically
 
 ## Date
-Generated on day 1096 of continuous learning.
+Generated on day 1122 of continuous learning.
 
 ## Category
 Topic: python
