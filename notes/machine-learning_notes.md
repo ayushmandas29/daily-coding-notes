@@ -1,10 +1,10 @@
-# Machine Learning - Note #1100
+# Machine Learning - Note #1126
 
 ## Key Insight
-Confusion matrices show classification performance
+Ensemble methods combine multiple weak learners
 
 ## Date
-Generated on day 1100 of continuous learning.
+Generated on day 1126 of continuous learning.
 
 ## Category
 Topic: machine-learning
