@@ -1,10 +1,10 @@
-# Networking - Note #1105
+# Networking - Note #1131
 
 ## Key Insight
-TCP ensures reliable ordered data delivery
+HTTPS encrypts data in transit via TLS
 
 ## Date
-Generated on day 1105 of continuous learning.
+Generated on day 1131 of continuous learning.
 
 ## Category
 Topic: networking
