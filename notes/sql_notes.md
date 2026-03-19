@@ -1,10 +1,10 @@
-# Sql - Note #1102
+# Sql - Note #1128
 
 ## Key Insight
-Normalization reduces data redundancy
+Partitioning improves performance on large tables
 
 ## Date
-Generated on day 1102 of continuous learning.
+Generated on day 1128 of continuous learning.
 
 ## Category
 Topic: sql
