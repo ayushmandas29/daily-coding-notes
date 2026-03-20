@@ -1,10 +1,10 @@
-# Api Design - Note #1106
+# Api Design - Note #1132
 
 ## Key Insight
-Pagination prevents overwhelming API responses
+Rate limiting protects API availability
 
 ## Date
-Generated on day 1106 of continuous learning.
+Generated on day 1132 of continuous learning.
 
 ## Category
 Topic: api-design
