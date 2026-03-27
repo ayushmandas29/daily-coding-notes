@@ -1,10 +1,10 @@
-# Docker - Note #266
+# Docker - Note #292
 
 ## Key Insight
-Docker layers are cached for faster rebuilds
+Run containers as non-root for security
 
 ## Date
-Generated on day 266 of continuous learning.
+Generated on day 292 of continuous learning.
 
 ## Category
 Topic: docker
