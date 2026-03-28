@@ -1,10 +1,10 @@
-# Networking - Note #1131
+# Networking - Note #1157
 
 ## Key Insight
-HTTPS encrypts data in transit via TLS
+REST uses standard HTTP methods for APIs
 
 ## Date
-Generated on day 1131 of continuous learning.
+Generated on day 1157 of continuous learning.
 
 ## Category
 Topic: networking
