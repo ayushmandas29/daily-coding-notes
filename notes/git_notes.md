@@ -1,10 +1,10 @@
-# Git - Note #1129
+# Git - Note #1155
 
 ## Key Insight
-Rebase creates a linear commit history
+Interactive rebase allows squashing commits
 
 ## Date
-Generated on day 1129 of continuous learning.
+Generated on day 1155 of continuous learning.
 
 ## Category
 Topic: git
