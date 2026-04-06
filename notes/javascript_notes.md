@@ -1,10 +1,10 @@
-# Javascript - Note #1149
+# Javascript - Note #1175
 
 ## Key Insight
-Map and Set provide specialized data structures
+Spread operator creates shallow copies of arrays
 
 ## Date
-Generated on day 1149 of continuous learning.
+Generated on day 1175 of continuous learning.
 
 ## Category
 Topic: javascript
