@@ -1,10 +1,10 @@
-# Deep Learning - Note #1153
+# Deep Learning - Note #1179
 
 ## Key Insight
-Batch normalization stabilizes training
+Learning rate scheduling improves convergence
 
 ## Date
-Generated on day 1153 of continuous learning.
+Generated on day 1179 of continuous learning.
 
 ## Category
 Topic: deep-learning
