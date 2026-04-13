@@ -1,10 +1,10 @@
-# Ci Cd - Note #1165
+# Ci Cd - Note #1191
 
 ## Key Insight
-Branch protection enforces review policies
+Feature flags decouple deploy from release
 
 ## Date
-Generated on day 1165 of continuous learning.
+Generated on day 1191 of continuous learning.
 
 ## Category
 Topic: ci-cd
