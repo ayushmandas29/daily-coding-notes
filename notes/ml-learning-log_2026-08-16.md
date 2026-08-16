@@ -1,362 +1,1589 @@
-# ML Learning Log — 2026-08-16
+# Machine Learning & AI Research Learning Log
 
-A consolidated study note covering the machine-learning and AI concepts I am actively learning, revising, and applying in projects.
+**Date:** 2026-08-16  
+**Purpose:** Research-oriented study notes for machine learning, deep learning, NLP, LLMs, RAG, computer vision, sequence modeling, MLOps, deployment, evaluation, and responsible AI.
 
-## 1. End-to-End Machine Learning Lifecycle
-
-A production ML system is more than model training. The practical lifecycle is:
-
-1. **Problem definition** — identify the business/technical objective, target variable, constraints, and success metric.
-2. **Data collection** — gather representative data from files, databases, APIs, sensors, logs, or public datasets.
-3. **Data validation** — check schema, missing values, duplicates, invalid ranges, inconsistent categories, and label quality.
-4. **Preprocessing** — clean data, encode categorical variables, scale numerical features when appropriate, and split data correctly.
-5. **Feature engineering** — create informative features from domain knowledge, timestamps, text, aggregates, or interactions.
-6. **Model development** — establish a simple baseline before experimenting with more complex models.
-7. **Evaluation** — choose metrics that match the problem and inspect errors, not only a single score.
-8. **Deployment** — expose the model through an application, API, batch pipeline, or embedded/edge workflow.
-9. **Monitoring** — track prediction quality, data drift, concept drift, latency, failures, resource usage, and business impact.
-10. **Iteration** — use monitoring and error analysis to improve data, features, models, and deployment.
-
-### Key lesson
-A model with excellent validation accuracy can still fail in production if the training data, inference environment, latency requirements, or monitoring strategy are weak.
+> **Research standard:** This document separates established concepts from engineering recommendations and project-specific observations. Claims are grounded primarily in peer-reviewed/archival research papers, official framework documentation, government standards, or university/industry technical documentation. URLs are preserved so individual claims can be checked against the original source.
 
 ---
 
-## 2. Messy Real-World Data
+## 1. Machine Learning Foundations
 
-Common problems I need to handle systematically:
+### 1.1 What is machine learning?
 
-### Missing values
-- Numerical: median/mean imputation when justified, model-based imputation, or an explicit missing indicator.
-- Categorical: most-frequent category or an `Unknown` category when semantically appropriate.
-- Do not blindly impute values before understanding why they are missing.
+Machine learning (ML) studies algorithms that improve their performance on a task through experience/data rather than being explicitly programmed with a fixed rule for every case.
 
-### Outliers
-- Detect with domain limits, IQR, robust statistics, or visualization.
-- Decide whether an outlier is a data error, rare valid observation, or an important signal.
-- Avoid deleting extreme observations automatically.
+A useful formal view is to define:
 
-### Duplicates
-- Exact duplicates can inflate model performance and bias frequency-based learning.
-- Near-duplicates may create train/test leakage when the same underlying observation appears in multiple splits.
+- a dataset of examples `(x, y)` or unlabeled `x`
+- a hypothesis/model `f(x; θ)` with parameters `θ`
+- an objective/loss function `L`
+- an optimization procedure that finds parameters that perform well on data
+- an evaluation procedure that estimates generalization to unseen data
 
-### Inconsistent categories
-Examples: `Bangalore`, `Bengaluru`, `bangalore`, and trailing-space variants.
-Normalize casing, whitespace, spelling, and category definitions before modeling.
+The central scientific problem is **generalization**: learning patterns that remain useful beyond the observations used for fitting.
 
-### Class imbalance
-Accuracy can become misleading when one class dominates.
-Useful approaches include class weights, resampling, threshold tuning, and suitable metrics such as precision, recall, F1, PR-AUC, and ROC-AUC where appropriate.
+### 1.2 Main learning paradigms
 
-### Data leakage
-Leakage occurs when information unavailable at prediction time enters the training process.
-Typical sources:
-- preprocessing fitted on the full dataset before splitting
-- future information in features
-- target-derived features
-- duplicates across train and test sets
+#### Supervised learning
+The model learns from examples containing target labels.
 
-**Rule:** split first where appropriate, then fit preprocessing only on the training data.
+Typical tasks:
+- classification
+- regression
+- sequence prediction
+- structured prediction
+
+#### Unsupervised learning
+The algorithm learns structure without an explicit target label.
+
+Typical tasks:
+- clustering
+- dimensionality reduction
+- density estimation
+- representation learning
+
+#### Self-supervised learning
+The training signal is constructed from the data itself. Modern language and vision systems frequently use self-supervised objectives to learn representations from large unlabeled datasets.
+
+#### Reinforcement learning
+An agent interacts with an environment, receives rewards, and learns a policy for choosing actions. The objective differs from supervised learning because feedback can be delayed and depends on sequential decisions.
+
+**Trusted overview:** [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course) and [scikit-learn Getting Started](https://scikit-learn.org/stable/getting_started.html).
 
 ---
 
-## 3. Feature Engineering
+## 2. Mathematical Core of ML
 
-Feature engineering converts raw observations into representations that help a model learn useful patterns.
+### 2.1 Features, targets, parameters
+
+- `X` represents input features.
+- `y` represents targets/labels.
+- `θ` represents trainable parameters.
+- `f(X; θ)` represents model predictions.
+- `L(y, f(X; θ))` measures prediction error.
+
+Training attempts to minimize an empirical objective such as:
+
+`J(θ) = (1/n) Σ L(y_i, f(x_i; θ))`
+
+Regularized objectives may add a penalty term:
+
+`J_reg(θ) = J(θ) + λ Ω(θ)`
+
+where `λ` controls the strength of regularization.
+
+### 2.2 Bias and variance
+
+A model that is too simple may have high systematic error (high bias). A model that is too flexible can fit noise and become sensitive to the training sample (high variance).
+
+The practical objective is not to minimize training error at any cost; it is to obtain strong generalization under the expected deployment distribution.
+
+### 2.3 Loss functions
+
+Common examples:
+
+- Mean Squared Error (MSE) for regression
+- Mean Absolute Error (MAE) for regression
+- Binary cross-entropy for binary classification
+- Categorical cross-entropy for multi-class classification
+- Huber loss for a compromise between squared and absolute error behavior
+- CTC loss for certain unaligned sequence-to-sequence problems
+
+Loss is an optimization objective; an evaluation metric does not necessarily have to be identical to the training loss.
+
+---
+
+## 3. Dataset Construction and Data Quality
+
+Data quality is frequently a larger determinant of ML performance than simply selecting a more sophisticated algorithm. Google's ML curriculum explicitly emphasizes dataset construction, transformation, labels, splitting, and data quality as central parts of ML work.
+
+Source: [Google — Datasets, Generalization, and Overfitting](https://developers.google.com/machine-learning/crash-course/overfitting).
+
+### 3.1 Dataset documentation
+
+For research-quality work, record:
+
+- dataset name and version
+- source and license
+- collection methodology
+- population represented
+- features and labels
+- known limitations
+- missing-value policy
+- preprocessing
+- train/validation/test split policy
+- possible leakage paths
+- class distribution
+- temporal/geographical/group structure
+
+### 3.2 Missing values
+
+Missingness can be informative. Before choosing an imputation method, determine whether missing values are random, systematic, or generated by the data collection process.
+
+Possible strategies:
+
+- remove records when justified
+- mean/median imputation
+- categorical `Unknown`
+- model-based imputation
+- missingness indicator
+
+Any learned imputation parameters must be fitted using training data and then applied to validation/test/deployment data.
+
+### 3.3 Outliers
+
+An outlier can be:
+
+1. a measurement/data-entry error,
+2. a rare but valid observation, or
+3. an important signal.
+
+Use domain constraints, robust statistics, visual inspection, and error analysis before deleting observations.
+
+### 3.4 Duplicates and near duplicates
+
+Duplicates can distort class frequencies and evaluation. Near-duplicates are particularly dangerous when the same underlying observation occurs in both training and test sets.
+
+### 3.5 Inconsistent categories
+
+Normalize values such as:
+
+`Bangalore`, `Bengaluru`, `bangalore`, ` Bangalore `
+
+only when the domain semantics justify treating them as the same category.
+
+### 3.6 Class imbalance
+
+When one class dominates, accuracy may hide poor minority-class performance.
+
+Possible approaches:
+
+- class weighting
+- resampling
+- threshold optimization
+- precision/recall analysis
+- PR-AUC
+- ROC-AUC
+- cost-sensitive learning
+
+There is no universal best imbalance strategy; the choice depends on the error costs and deployment setting.
+
+---
+
+## 4. Train / Validation / Test Strategy
+
+A model should not be evaluated on the same examples used to fit it.
+
+A common workflow is:
+
+`raw dataset → training set + validation set + test set`
+
+- **Training set:** fit model parameters.
+- **Validation set:** model/feature/hyperparameter selection during development.
+- **Test set:** final estimate after development decisions are complete.
+
+The test set can become statistically less trustworthy if it is repeatedly inspected and used to guide decisions.
+
+Source: [Google — Dividing the Original Dataset](https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets).
+
+### 4.1 Cross-validation
+
+K-fold cross-validation partitions the training data into folds and repeatedly trains/evaluates so that each fold serves as validation.
+
+Cross-validation is useful for estimating performance and comparing models, particularly when data is limited. It must be adapted to the data structure.
 
 Examples:
-- Extract `day`, `month`, `weekday`, and hour from timestamps.
-- Create ratios and interaction features where domain logic supports them.
-- Aggregate transaction histories into count, mean, recency, and frequency features.
-- For text, use tokenization, embeddings, TF-IDF, or transformer representations depending on the task.
 
-### Important principle
-Good features reduce the amount of pattern the model has to discover from raw data, but features must remain available and valid at inference time.
+- Stratified CV for class labels
+- Grouped CV when observations from the same entity must not cross folds
+- Time-series splits when temporal order matters
 
----
+Source: [scikit-learn Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html).
 
-## 4. Model Selection and Baselines
+### 4.2 Time-series split
 
-Start with a simple baseline:
-- Linear/Logistic Regression
-- Decision Tree
-- Random Forest
-- Gradient boosting
+For forecasting, randomly shuffling future observations into training can leak information. A temporal split should respect chronology.
 
-Then compare against more complex models when the problem justifies it.
+Example:
 
-### Why baselines matter
-A complicated neural network is not automatically better than a strong classical baseline. Baselines establish whether additional model complexity actually produces meaningful improvement.
+`past → training`  
+`later period → validation`  
+`latest period → test`
+
+The same principle applies to production systems where the future distribution is what matters.
 
 ---
 
-## 5. Optimization and Gradient Descent
+## 5. Data Leakage
 
-Gradient-based optimization updates model parameters in the direction that reduces the loss.
+**Data leakage** occurs when information unavailable at prediction time influences training or evaluation.
 
-A basic update is:
+Common forms:
 
-`theta = theta - learning_rate * gradient`
+- scaling before the train/test split
+- imputing using all observations
+- target-derived features
+- future information in historical prediction tasks
+- duplicates across partitions
+- label information hidden in filenames or IDs
+- using post-outcome variables
 
-### Learning rate
-- Too large → unstable training or divergence.
-- Too small → slow convergence.
-- A schedule can reduce the learning rate as training progresses.
+scikit-learn explicitly warns that scaling the complete dataset before splitting can leak test-set information and recommends fitting transformations inside a `Pipeline`.
 
-### Common optimizers
-- **SGD** — simple and often a useful baseline.
-- **Momentum SGD** — smooths updates using previous gradients.
-- **Adam** — adaptive learning rates using estimates of first and second moments.
-- **RMSProp** — adapts updates using a moving average of squared gradients.
+Source: [scikit-learn preprocessing and leakage warning](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.minmax_scale.html).
 
-Optimizer choice should be evaluated experimentally rather than treated as a universal rule.
+### Research rule
+Every feature should answer:
+
+> “Could this exact value have been known at the moment the prediction was supposed to be made?”
+
+If not, it should not be used.
 
 ---
 
-## 6. Overfitting and Regularization
+## 6. Preprocessing and Feature Engineering
 
-Overfitting occurs when a model learns training-specific patterns that do not generalize well.
+### 6.1 Numerical features
 
-Ways to reduce it:
-- collect more representative data
-- simplify the model
-- regularization
-- dropout in neural networks
+Common transformations:
+
+- standardization / z-score scaling
+- min-max scaling
+- robust scaling
+- log transformations where justified
+- clipping/winsorization where domain-appropriate
+
+Scaling is especially important for algorithms affected by feature magnitude, such as many gradient-based and distance-based methods.
+
+### 6.2 Categorical features
+
+Common representations:
+
+- one-hot encoding
+- ordinal encoding when order is meaningful
+- frequency/count encoding
+- learned embeddings
+- target encoding with strict leakage controls
+
+### 6.3 Feature engineering
+
+Examples:
+
+- date/time decomposition
+- rolling statistics
+- ratios
+- interaction terms
+- domain aggregates
+- text statistics
+- image representations
+- learned embeddings
+
+The feature must be reproducible and available during serving.
+
+### 6.4 Feature pipeline consistency
+
+A major production risk is **training-serving skew**: the transformation applied during training differs from the transformation applied at inference.
+
+Google's production ML guidance discusses when to transform data and the tradeoffs between preprocessing before training and during the training/inference pipeline.
+
+Source: [Google — When to Transform Data](https://developers.google.com/machine-learning/crash-course/production-ml-systems/transforming-data).
+
+---
+
+## 7. Classical Supervised Learning
+
+### 7.1 Linear regression
+
+Linear regression models a continuous target as a linear combination of features.
+
+Strengths:
+- interpretable baseline
+- computationally efficient
+- useful when relationships are approximately linear
+
+Limitations:
+- linear functional form
+- sensitivity to assumptions and data quality
+- may underfit nonlinear relationships
+
+### 7.2 Logistic regression
+
+Despite its name, logistic regression is primarily a classification method. It models class probabilities through a logistic/sigmoid transformation of a linear score in binary classification.
+
+It is an important baseline because it is relatively interpretable and often competitive on well-engineered tabular data.
+
+### 7.3 Decision trees
+
+Decision trees recursively partition feature space using decision rules.
+
+Advantages:
+- interpretable structure
+- handles nonlinear interactions
+- can work without feature scaling
+
+Risks:
+- individual trees can overfit
+- unstable to changes in data
+
+### 7.4 Random forests
+
+Random forests combine many randomized decision trees. Bootstrap sampling and random feature selection help decorrelate trees, reducing variance compared with a single tree.
+
+Source: [scikit-learn Ensemble Methods](https://scikit-learn.org/stable/modules/ensemble.html).
+
+### 7.5 Gradient-boosted trees
+
+Gradient boosting builds an additive ensemble sequentially, with later learners focusing on residual/error structure under a chosen differentiable loss.
+
+Gradient-boosted trees are particularly strong for many tabular-data problems.
+
+Source: [scikit-learn Gradient Boosting](https://scikit-learn.org/stable/modules/ensemble.html).
+
+---
+
+## 8. Unsupervised Learning
+
+### 8.1 Clustering
+
+Clustering attempts to group observations according to a similarity criterion.
+
+Common methods:
+
+- K-means
+- hierarchical clustering
+- DBSCAN
+- Gaussian mixture models
+
+The choice of distance/similarity measure and scaling can strongly influence results.
+
+### 8.2 Dimensionality reduction
+
+Methods such as PCA can compress high-dimensional data while retaining important variance under the method's objective.
+
+Dimensionality reduction can support visualization, noise reduction, preprocessing, and representation analysis, but a lower-dimensional representation can discard information.
+
+---
+
+## 9. Model Selection and Hyperparameter Tuning
+
+### Parameters vs hyperparameters
+
+- **Parameters:** learned from training data.
+- **Hyperparameters:** selected outside the fitting procedure, e.g. tree depth, regularization strength, learning rate, number of estimators.
+
+### Tuning methods
+
+- grid search
+- randomized search
+- Bayesian optimization
+- successive-halving approaches
+
+Hyperparameter tuning must be nested inside a sound validation strategy. Otherwise the evaluation can become optimistic.
+
+Source: [scikit-learn Model Selection](https://scikit-learn.org/stable/model_selection.html).
+
+### Baseline-first principle
+
+A research experiment should establish a reproducible baseline before adding complexity. This makes it possible to attribute improvements to actual methodological changes.
+
+---
+
+## 10. Evaluation and Error Analysis
+
+### 10.1 Confusion matrix
+
+For binary classification:
+
+- TP = true positive
+- TN = true negative
+- FP = false positive
+- FN = false negative
+
+### 10.2 Accuracy
+
+`Accuracy = (TP + TN) / (TP + TN + FP + FN)`
+
+Useful when class distribution and error costs make it appropriate.
+
+### 10.3 Precision
+
+`Precision = TP / (TP + FP)`
+
+Of predicted positives, how many were positive?
+
+### 10.4 Recall
+
+`Recall = TP / (TP + FN)`
+
+Of actual positives, how many were detected?
+
+### 10.5 F1 score
+
+`F1 = 2 * Precision * Recall / (Precision + Recall)`
+
+F1 summarizes precision and recall through their harmonic mean.
+
+### 10.6 ROC-AUC and PR-AUC
+
+ROC curves examine true-positive rate against false-positive rate over thresholds. Precision-recall analysis is often particularly informative when positive classes are rare.
+
+Source: [scikit-learn Metrics and Scoring](https://scikit-learn.org/stable/modules/model_evaluation.html).
+
+### 10.7 Regression metrics
+
+- **MAE:** average absolute error.
+- **MSE:** average squared error.
+- **RMSE:** square root of MSE, retaining target units.
+- **R²:** proportion of variance explained relative to a baseline under its standard definition.
+
+Metric choice must reflect the real cost function.
+
+### 10.8 Error analysis
+
+After obtaining a metric, inspect failures:
+
+- Which classes fail?
+- Which demographic/group segments fail?
+- Which data sources fail?
+- Are errors concentrated at particular confidence levels?
+- Are there annotation errors?
+- Does the model fail under distribution shift?
+
+Error analysis frequently reveals more actionable information than one aggregate metric.
+
+---
+
+## 11. Generalization, Overfitting and Regularization
+
+Overfitting occurs when a model performs well on training data but poorly on unseen data.
+
+Sources of overfitting include:
+
+- excessive model complexity
+- insufficient data
+- noisy labels
+- unrepresentative training data
+- excessive tuning against validation data
+
+Source: [Google — Overfitting](https://developers.google.com/machine-learning/crash-course/overfitting/overfitting).
+
+### Regularization methods
+
+- L1 regularization
+- L2 regularization / weight decay
+- dropout
 - early stopping
 - data augmentation
-- cross-validation where appropriate
+- architectural constraints
+- collecting better/more representative data
 
-### Important distinction
-High training accuracy + much lower validation/test performance is a strong warning sign of poor generalization.
-
----
-
-## 7. Deep Learning Notes
-
-### CNNs
-Convolutional Neural Networks learn spatial features using convolutional filters.
-Typical progression:
-
-`input -> convolution -> activation -> pooling -> deeper features -> classifier`
-
-Earlier layers often learn edges/textures; deeper layers learn increasingly task-specific patterns.
-
-### Transfer learning
-A pretrained network can provide reusable representations.
-Useful strategies:
-- freeze most layers and train a new classifier
-- fine-tune selected deeper layers
-- fine-tune more of the network with a smaller learning rate
-
-Models I have been studying include ZFNet, VGG16, GoogLeNet/Inception, EfficientNet, DenseNet, and Inception-ResNet.
-
-### CNN model comparison lesson
-Architecture depth, parameter count, compute cost, receptive fields, normalization, skip connections, and dataset size all affect practical performance.
+Regularization should be treated as an experimental design choice rather than a universal recipe.
 
 ---
 
-## 8. Sequence Models and Forecasting
+## 12. Optimization and Gradient Descent
 
-### RNN / LSTM / GRU
-These models are designed for sequential dependencies.
+A gradient-based optimizer updates parameters using information about the gradient of the loss.
 
-- **RNN**: basic recurrent state, but can struggle with long-term dependencies.
-- **LSTM**: uses gates and a cell state to preserve useful information over longer sequences.
-- **GRU**: a simpler gated recurrent architecture with fewer gates than LSTM.
-- **BiLSTM**: processes sequence context in both directions and is useful when future context is available during prediction.
+Basic gradient descent:
 
-For forecasting tasks, evaluation must respect time order. Randomly shuffling temporal data can cause leakage.
+`θ ← θ − η ∇J(θ)`
+
+where `η` is the learning rate.
+
+### Learning rate
+
+- Too large → unstable optimization/divergence.
+- Too small → slow optimization.
+- Schedules can change the learning rate over training.
+
+### SGD
+
+Stochastic gradient descent estimates the gradient from mini-batches rather than the entire dataset.
+
+### Momentum
+
+Momentum accumulates information from previous gradients to smooth and accelerate updates in useful directions.
+
+### Adam
+
+Adam uses adaptive estimates of lower-order gradient moments. The original paper describes it as a computationally efficient first-order method with relatively low memory requirements and suitability for large/noisy/sparse-gradient settings.
+
+Primary source: [Kingma & Ba — Adam](https://arxiv.org/abs/1412.6980).
+
+### RMSProp
+
+RMSProp adapts the step size using a moving average of squared gradients. It is widely used in neural-network optimization.
+
+### Important research note
+
+No optimizer is universally optimal. Optimizer performance depends on architecture, objective, batch size, learning-rate schedule, regularization, data, and computational budget.
 
 ---
 
-## 9. NLP and Transformer Learning
+## 13. Neural Network Fundamentals
 
-Important concepts:
+A basic feed-forward neural network applies learned affine transformations followed by nonlinear activation functions.
+
+`z = Wx + b`
+
+`a = φ(z)`
+
+Without nonlinearities, stacking linear layers still produces a linear transformation; nonlinear activation functions therefore provide the expressive structure of standard multilayer networks.
+
+### Common activations
+
+- ReLU
+- sigmoid
+- tanh
+- softmax
+- GELU
+
+### Backpropagation
+
+Backpropagation computes derivatives of the loss with respect to parameters using the chain rule. An optimizer then uses these derivatives to update parameters.
+
+PyTorch's official Autograd documentation explains how automatic differentiation computes partial derivatives used in backpropagation-based learning.
+
+Source: [PyTorch Autograd](https://docs.pytorch.org/tutorials/beginner/introyt/autogradyt_tutorial.html).
+
+---
+
+## 14. Deep Learning Training Mechanics
+
+A typical training loop is:
+
+`batch → forward pass → loss → backward pass → optimizer step → reset gradients`
+
+Important hyperparameters:
+
+- batch size
+- learning rate
+- number of epochs
+- optimizer
+- weight decay
+- dropout rate
+- architecture
+- augmentation policy
+
+### Batch normalization
+
+Batch Normalization normalizes activations using statistics computed during training and maintains parameters for the transformation. The original paper showed that it can enable higher learning rates and improve optimization behavior.
+
+Primary source: [Ioffe & Szegedy — Batch Normalization](https://arxiv.org/abs/1502.03167).
+
+---
+
+## 15. Convolutional Neural Networks
+
+CNNs exploit spatial locality through learned convolutional filters.
+
+Typical architecture:
+
+`image → convolution → activation → normalization/pooling → deeper convolution blocks → global pooling/flattening → classifier`
+
+### Convolution concepts
+
+Important terms:
+
+- kernel/filter
+- stride
+- padding
+- receptive field
+- feature map
+- channels
+
+### Pooling
+
+Pooling can reduce spatial dimensions and computational cost while providing some local invariance. Modern architectures sometimes replace explicit pooling with strided convolutions or other downsampling mechanisms.
+
+---
+
+## 16. CNN Architectures Being Studied
+
+### ZFNet
+ZFNet investigated visualization and architectural choices in convolutional networks and improved upon earlier ImageNet CNN design through analysis of learned features.
+
+Primary source: [Visualizing and Understanding Convolutional Networks](https://arxiv.org/abs/1311.2901).
+
+### VGG
+VGG demonstrated the effectiveness of deeper networks using small `3×3` convolution filters and systematic depth increases.
+
+Primary source: [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/abs/1409.1556).
+
+### GoogLeNet / Inception
+The Inception architecture introduced parallel convolutional paths within modules to efficiently capture features at different spatial scales while controlling computational cost.
+
+Primary source: [Going Deeper with Convolutions](https://arxiv.org/abs/1409.4842).
+
+### ResNet
+Residual connections reformulate layers to learn residual functions, making substantially deeper networks easier to optimize.
+
+Primary source: [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385).
+
+### DenseNet
+Dense connectivity connects each layer to subsequent layers, encouraging feature reuse and improving gradient flow.
+
+Primary source: [Densely Connected Convolutional Networks](https://arxiv.org/abs/1608.06993).
+
+### EfficientNet
+EfficientNet studied coordinated scaling of network depth, width, and input resolution rather than scaling only one dimension.
+
+Primary source: [EfficientNet](https://arxiv.org/abs/1905.11946).
+
+### Inception-ResNet
+Inception-ResNet combines Inception-style multi-branch processing with residual connections.
+
+Primary source: [Inception-v4, Inception-ResNet and the Impact of Residual Connections](https://arxiv.org/abs/1602.07261).
+
+---
+
+## 17. Transfer Learning
+
+Transfer learning reuses representations learned on one task/domain for another task.
+
+Typical workflow:
+
+1. choose a pretrained backbone
+2. replace/adapt the task head
+3. freeze the backbone initially when appropriate
+4. train the new head
+5. optionally unfreeze selected layers
+6. fine-tune with a smaller learning rate
+7. compare against a baseline
+
+Transfer learning is particularly useful when the target dataset is relatively small compared with the data used to pretrain the backbone.
+
+### Research caution
+
+Pretraining and target-domain mismatch can reduce transfer effectiveness. Always validate whether the learned representation actually transfers to the target distribution.
+
+---
+
+## 18. Data Augmentation
+
+Data augmentation creates altered training examples that preserve the target semantics.
+
+For images:
+
+- horizontal flips where valid
+- crop/resize
+- rotation
+- brightness/contrast changes
+- noise
+- color transformations
+- temporal jitter for video
+
+Augmentation must reflect realistic invariances. An augmentation that changes the label semantics can hurt rather than help.
+
+---
+
+## 19. Sequence Modeling: RNN, LSTM and GRU
+
+### RNN
+
+An RNN maintains a hidden state that evolves across sequence steps. Basic RNNs can experience vanishing/exploding gradients over long sequences.
+
+### LSTM
+
+Long Short-Term Memory introduces gated mechanisms and a cell state designed to preserve useful information over longer temporal ranges.
+
+### GRU
+
+Gated Recurrent Units provide a simpler gated recurrent architecture with fewer gating components than LSTM.
+
+### BiLSTM
+
+A bidirectional LSTM processes a sequence in both directions. This can be useful when the entire sequence is available before the prediction is produced.
+
+**Important:** bidirectional models are not automatically appropriate for strict online forecasting because future context may not be available at inference time.
+
+---
+
+## 20. Time-Series Forecasting
+
+Time-series modeling requires respecting temporal order.
+
+Pipeline:
+
+`historical observations → temporal features → train/validation/test by time → forecasting model → rolling evaluation`
+
+Important considerations:
+
+- seasonality
+- trend
+- autocorrelation
+- non-stationarity
+- concept drift
+- future covariates
+- missing timestamps
+- leakage from future information
+
+For demand/energy forecasting, evaluate both average error and behavior during peaks, troughs, and regime changes.
+
+---
+
+## 21. Natural Language Processing
+
+NLP covers computational processing of human language.
+
+Important areas:
+
+- tokenization
+- normalization
+- stemming/lemmatization where appropriate
+- n-grams
+- TF-IDF
+- embeddings
+- sequence models
+- attention
+- transformers
+- language modeling
+- classification
+- information retrieval
+- question answering
+- summarization
+
+The Hugging Face course provides practical coverage of Transformers, Datasets, Tokenizers, Accelerate, and modern LLM workflows.
+
+Source: [Hugging Face Course](https://huggingface.co/learn/nlp-course/chapter1/1).
+
+---
+
+## 22. Word and Sentence Embeddings
+
+An embedding represents an object such as a token, sentence, image, or document as a numerical vector.
+
+The purpose is to create a representation where useful relationships can be learned from geometric structure.
+
+Applications:
+
+- semantic search
+- recommendation
+- clustering
+- classification
+- retrieval
+- RAG
+
+Embedding quality depends on the training objective, data, model, domain, and similarity function used during retrieval.
+
+---
+
+## 23. Transformers and Attention
+
+The Transformer architecture was introduced in *Attention Is All You Need*.
+
+The original Transformer replaced recurrence and convolution in sequence transduction with attention-based architecture, enabling substantially more parallel computation during training.
+
+Primary source: [Vaswani et al. — Attention Is All You Need](https://arxiv.org/abs/1706.03762).
+
+### Self-attention
+
+At a high level, self-attention computes interactions between sequence elements using query, key, and value representations.
+
+Scaled dot-product attention is commonly expressed as:
+
+`Attention(Q,K,V) = softmax(QKᵀ / √d_k)V`
+
+### Multi-head attention
+
+Multiple attention heads allow the model to learn different interaction patterns in parallel.
+
+### Positional information
+
+Because attention itself does not inherently impose sequence order, transformer architectures need a mechanism to represent positional information.
+
+---
+
+## 24. BERT and Transformer Fine-Tuning
+
+BERT (Bidirectional Encoder Representations from Transformers) introduced deep bidirectional pretraining from unlabeled text and demonstrated that pretrained representations could be fine-tuned for multiple NLP tasks with relatively small task-specific modifications.
+
+Primary source: [Devlin et al. — BERT](https://arxiv.org/abs/1810.04805).
+
+### Fine-tuning workflow
+
+`pretrained model → task-specific data → supervised objective → evaluation`
+
+Important considerations:
+
+- learning rate
+- sequence length
+- class imbalance
+- tokenization
+- domain shift
+- catastrophic forgetting
+- evaluation leakage
+
+---
+
+## 25. Large Language Models
+
+LLMs are large neural language models trained on extensive text corpora and optimized to model language/token sequences.
+
+Core concepts:
+
+- tokens
 - tokenization
 - embeddings
+- transformer blocks
 - attention
-- self-attention
-- positional information
-- encoder/decoder architectures
-- transfer learning
-- fine-tuning pretrained language models
+- positional representations
+- pretraining
+- instruction tuning
+- fine-tuning
+- preference optimization
+- inference/decoding
+- context windows
 
-### BERT-style learning
-BERT uses bidirectional transformer representations and can be fine-tuned for classification, token classification, question answering, and other language tasks.
+A useful conceptual distinction is:
 
-### RAG
-Retrieval-Augmented Generation combines retrieval with generation:
+**Model knowledge ≠ verified external knowledge.**
 
-`documents -> chunking -> embeddings -> vector search -> retrieved context -> LLM -> answer`
-
-Benefits:
-- grounds responses in a controlled knowledge source
-- makes domain knowledge updateable without retraining the base model
-- can provide source-aware answers when retrieval metadata is preserved
-
-Common failure modes:
-- poor chunking
-- weak retrieval
-- irrelevant context
-- missing citations/source tracking
-- prompt construction problems
-- context-window pressure
-
-Tools I am studying around this area include LangChain, LlamaIndex, Hugging Face, vector databases, and local LLM workflows.
+A language model can produce fluent text without guaranteeing factual correctness. Retrieval, evaluation, source verification, and system-level controls are therefore important for knowledge-intensive applications.
 
 ---
 
-## 10. Explainability
+## 26. Retrieval-Augmented Generation (RAG)
 
-Model explainability is useful for understanding why a model made a prediction, debugging failures, and communicating behavior.
+RAG combines a generative model with an external retriever.
+
+Typical pipeline:
+
+`documents → parsing → chunking → embeddings → vector index → retrieval → reranking/selection → context assembly → LLM → answer`
+
+The foundational RAG paper combines parametric model memory with non-parametric memory accessed through a dense vector index.
+
+Primary source: [Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401).
+
+### RAG design decisions
+
+#### Document ingestion
+Preserve:
+
+- source
+- title
+- author
+- publication date
+- section/page metadata where available
+- document version
+
+#### Chunking
+Chunk size should balance retrieval precision with sufficient context.
+
+Common approaches:
+
+- fixed token chunks
+- sentence-based chunks
+- paragraph/section chunks
+- semantic chunking
+- parent-child retrieval
+
+#### Retrieval
+Possible methods:
+
+- lexical search
+- dense vector retrieval
+- hybrid retrieval
+- metadata filtering
+- reranking
+
+#### Generation
+The prompt should clearly separate retrieved evidence from instructions and user content.
+
+### RAG failure modes
+
+- retrieval misses the correct passage
+- irrelevant passages dominate context
+- duplicate chunks consume context
+- stale documents
+- conflicting sources
+- poor metadata
+- prompt injection through retrieved content
+- unsupported generation despite retrieval
+
+### RAG evaluation
+
+Evaluate retrieval and generation separately.
+
+Retrieval metrics can include:
+
+- Recall@K
+- Precision@K
+- MRR
+- nDCG
+
+Generation evaluation can include:
+
+- factual correctness
+- faithfulness/groundedness
+- relevance
+- completeness
+- citation correctness
+- human evaluation
+
+---
+
+## 27. Explainable AI
+
+Explainability should be treated as a model-analysis tool rather than an automatic proof of correctness.
 
 ### Grad-CAM
-For convolutional models, Grad-CAM can highlight image regions that strongly influence a prediction.
+Grad-CAM uses gradients flowing into the final convolutional layer to create a coarse localization map highlighting regions relevant to a target concept.
 
-### Practical lesson
-Explainability is not proof that a model is correct. It is a diagnostic and communication tool that should be combined with quantitative evaluation and error analysis.
+Primary source: [Selvaraju et al. — Grad-CAM](https://arxiv.org/abs/1610.02391).
+
+Uses:
+
+- inspect model attention/activation regions
+- investigate failure modes
+- identify possible dataset bias
+- support communication with domain experts
+
+Limitations:
+
+- visualization resolution is limited
+- explanations can be sensitive to implementation choices
+- a plausible heatmap does not prove causal reasoning
+- explanation quality must be evaluated separately
 
 ---
 
-## 11. Evaluation and Error Analysis
+## 28. Computer Vision Research Workflow
 
-### Classification
-Depending on the task:
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- ROC-AUC
-- PR-AUC
-- Confusion matrix
+For image classification:
 
-### Regression
-- MAE
-- MSE
-- RMSE
-- R-squared
+`dataset → quality check → train/val/test split → preprocessing → augmentation → baseline → pretrained model → fine-tuning → evaluation → error analysis → explainability → deployment`
 
-### Sequence / speech-related tasks
+For video:
+
+`video → frame sampling → spatial preprocessing → ROI extraction → temporal modeling → sequence decoding → evaluation`
+
+Research records should include the exact preprocessing and split strategy because these can materially change results.
+
+---
+
+## 29. Silent Speech / Visual Speech Recognition Concepts
+
+A visual speech system attempts to infer linguistic content from visual information, typically lip/mouth movements, without relying directly on the acoustic signal.
+
+A conceptual pipeline is:
+
+`video → face/mouth localization → mouth ROI → spatial-temporal representation → sequence model → decoder → text`
+
+### 3D CNN
+A 3D convolution can model spatial and temporal structure jointly over video volumes.
+
+### BiLSTM
+A BiLSTM can model temporal dependencies after spatial-temporal feature extraction when the complete input sequence is available.
+
+### CTC
+Connectionist Temporal Classification is designed for sequence labeling problems where input and output alignments are unknown. It sums probability over valid alignments rather than requiring a frame-level label for every input step.
+
+For this project, the relevant evaluation measures include:
+
 - Character Error Rate (CER)
 - Word Error Rate (WER)
-- Sequence accuracy
-
-### Core lesson
-Metrics must match the cost of errors. For an imbalanced fraud-like problem, for example, accuracy alone can hide poor minority-class detection.
-
----
-
-## 12. MLOps and Production ML
-
-A production ML workflow should include:
-
-`data -> validation -> training -> evaluation -> artifact/versioning -> deployment -> monitoring -> retraining`
-
-Important practices:
-- version datasets and models
-- preserve reproducible training configurations
-- automate tests and deployment
-- containerize inference services where useful
-- separate training and inference environments
-- monitor both software and model behavior
-
-### Drift
-- **Data drift**: distribution of input features changes.
-- **Concept drift**: relationship between inputs and target changes.
-
-A monitoring system should detect meaningful changes and trigger investigation or retraining workflows when justified.
-
----
-
-## 13. Model Serving and Real-Time ML
-
-For real-time systems, accuracy is only one requirement.
-Important constraints include:
+- sequence accuracy
 - latency
-- throughput
-- memory usage
-- model size
-- CPU/GPU utilization
-- reliability
-- concurrency
 
-For edge/embedded inference, additional concerns include quantization, pruning, hardware acceleration, memory limits, and power consumption.
-
-### Practical lesson
-The best model is often the best model that satisfies the complete system constraints, not simply the one with the highest offline metric.
+Research claims about target accuracy or latency should only be recorded after measurement on a clearly defined test protocol.
 
 ---
 
-## 14. AI Projects I Am Connecting to These Concepts
+## 30. Model Compression and Efficient Inference
+
+Real-time and edge ML may require a model to satisfy strict constraints on:
+
+- latency
+- memory
+- throughput
+- energy
+- model size
+- hardware availability
+
+Common optimization approaches:
+
+### Quantization
+Represent weights/activations with lower precision when supported by the model and hardware.
+
+### Pruning
+Remove parameters or structures that contribute less to the final computation.
+
+### Knowledge distillation
+Train a smaller student model using information from a larger teacher model.
+
+### Compilation/acceleration
+Use hardware-specific or graph-level optimization when available.
+
+The correct objective is usually a multi-dimensional tradeoff rather than maximum offline accuracy.
+
+---
+
+## 31. Model Calibration and Uncertainty
+
+A classifier's confidence score should not automatically be interpreted as a calibrated probability.
+
+Calibration asks whether predictions with confidence `p` are correct approximately `p` of the time under the relevant evaluation distribution.
+
+Useful concepts:
+
+- reliability diagrams
+- Expected Calibration Error (ECE)
+- temperature scaling
+- confidence thresholding
+- selective prediction
+
+Uncertainty is particularly important in high-impact applications where the system should be able to abstain or escalate uncertain cases.
+
+---
+
+## 32. Distribution Shift and Drift
+
+A model can degrade when production data differs from training data.
+
+### Covariate/data drift
+Input distribution changes.
+
+`P_train(X) ≠ P_prod(X)`
+
+### Label shift
+Target distribution changes.
+
+`P_train(Y) ≠ P_prod(Y)`
+
+### Concept drift
+The relationship between inputs and targets changes.
+
+`P_train(Y|X) ≠ P_prod(Y|X)`
+
+Monitoring should combine statistical signals with business/model outcomes. Drift detection alone does not prove that model quality has degraded.
+
+---
+
+## 33. MLOps and Production ML
+
+A production ML system is much larger than its model code. Google's production ML guidance describes components including data collection, verification, feature extraction, process management, configuration, resource management, serving infrastructure, monitoring, and model code.
+
+Source: [Google — Production ML Systems](https://developers.google.com/machine-learning/crash-course/production-ml-systems).
+
+Recommended lifecycle:
+
+`data → validation → preprocessing → training → evaluation → artifact/versioning → deployment → monitoring → retraining`
+
+### Reproducibility
+Record:
+
+- code version
+- dataset version
+- environment/dependencies
+- random seeds where relevant
+- preprocessing configuration
+- hyperparameters
+- model architecture
+- training metrics
+- evaluation data
+
+---
+
+## 34. Experiment Tracking
+
+Experiment tracking prevents “which run produced this model?” problems.
+
+Track:
+
+- parameters
+- metrics
+- source-code version
+- datasets
+- model artifacts
+- plots
+- environment metadata
+
+MLflow Tracking provides an API/UI for logging parameters, code versions, metrics, and output files, and organizes work into runs and experiments.
+
+Source: [MLflow Tracking](https://mlflow.org/docs/latest/ml/tracking/).
+
+---
+
+## 35. Model Registry and Versioning
+
+A model registry can maintain deployable model versions and associated metadata.
+
+A production model should be traceable to:
+
+`model version → training run → dataset version → code commit → evaluation report`
+
+MLflow's Model Registry documentation covers model registration, versions, aliases, and tags.
+
+Source: [MLflow Model Registry](https://mlflow.org/docs/latest/ml/model-registry/workflow/).
+
+---
+
+## 36. Deployment Patterns
+
+### Batch inference
+Predictions are generated periodically for a large dataset.
+
+Good for:
+- reports
+- scheduled scoring
+- offline recommendations
+
+### Online inference
+A request receives a prediction through an API/service.
+
+Important concerns:
+- latency
+- concurrency
+- availability
+- input validation
+- model loading
+
+### Streaming inference
+Predictions are generated continuously as events arrive.
+
+### Edge inference
+The model runs near the data source, such as a mobile or embedded device.
+
+Benefits can include lower latency and reduced data transfer; constraints include memory, compute, energy, and model portability.
+
+---
+
+## 37. Docker and ML Services
+
+Containers package an application and its runtime dependencies into a reproducible unit.
+
+For ML services, a container can include:
+
+- inference code
+- model artifact or model download mechanism
+- Python runtime
+- libraries
+- system dependencies
+
+Important production practices:
+
+- pin dependencies where appropriate
+- minimize image size
+- avoid embedding secrets
+- use non-root execution where appropriate
+- validate model integrity
+- expose health/readiness checks
+
+---
+
+## 38. CI/CD for ML
+
+Continuous integration should test:
+
+- preprocessing code
+- unit functions
+- data validation
+- API contracts
+- model loading
+- inference behavior
+
+Continuous delivery/deployment should verify that the candidate model satisfies defined quality and operational gates before promotion.
+
+ML-specific CI/CD can include:
+
+`code test → data test → train/evaluate → metric gate → package → deploy → smoke test → monitor`
+
+---
+
+## 39. Kubernetes and ML Workloads
+
+Kubernetes can orchestrate containerized services and provide mechanisms for deployment, scaling, service discovery, and resource management.
+
+ML-specific considerations include:
+
+- CPU/GPU scheduling
+- model startup time
+- large model storage
+- autoscaling behavior
+- batch vs online workloads
+- observability
+
+Kubernetes is an infrastructure tool; it does not itself solve data quality, model evaluation, or ML governance.
+
+---
+
+## 40. Real-Time ML Engineering
+
+A real-time model must satisfy a service-level objective, not merely achieve a high validation score.
+
+Measure:
+
+- p50 latency
+- p95 latency
+- p99 latency
+- throughput
+- error rate
+- resource utilization
+- cold-start time
+- model loading time
+
+For embedded inference also measure:
+
+- RAM usage
+- flash/storage size
+- CPU cycles
+- energy/power
+- thermal constraints
+
+---
+
+## 41. Monitoring
+
+Monitoring should cover four broad areas:
+
+### System health
+- CPU/GPU
+- memory
+- latency
+- errors
+- availability
+
+### Data health
+- schema changes
+- missing values
+- invalid ranges
+- distribution changes
+- category changes
+
+### Model health
+- prediction distribution
+- confidence distribution
+- drift
+- calibration
+- quality metrics when labels become available
+
+### Business/operational health
+- conversion
+- revenue impact
+- false-positive cost
+- false-negative cost
+- human escalation rate
+
+A model-monitoring dashboard without business context can miss important failures.
+
+---
+
+## 42. Responsible AI and Trustworthy ML
+
+Responsible AI should consider the complete lifecycle: design, development, deployment, use, monitoring, and evaluation.
+
+NIST AI RMF identifies trustworthiness characteristics including validity/reliability, safety, security/resilience, accountability/transparency, explainability/interpretablity, privacy enhancement, and fairness with harmful bias managed.
+
+Source: [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework).
+
+### Four NIST AI RMF functions
+
+- **Govern:** establish policies, roles, accountability, and risk processes.
+- **Map:** understand context, intended use, affected stakeholders, and risks.
+- **Measure:** evaluate and document risks using appropriate testing and metrics.
+- **Manage:** prioritize and address identified risks.
+
+Source: [NIST AI RMF Playbook](https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook).
+
+---
+
+## 43. ML Fairness and Bias
+
+Bias can enter through:
+
+- data collection
+- sampling
+- labels
+- missing values
+- measurement choices
+- feature selection
+- model optimization
+- threshold selection
+- deployment context
+
+Fairness should be evaluated using relevant subgroups and task-specific definitions rather than assuming a single universal fairness metric.
+
+Google's ML curriculum recommends auditing data and predictions for bias and examining performance across groups.
+
+Source: [Google — ML Fairness](https://developers.google.com/machine-learning/crash-course/fairness).
+
+---
+
+## 44. Privacy and Security
+
+ML systems can expose risks involving:
+
+- sensitive training data
+- model inversion
+- membership inference
+- prompt injection
+- data poisoning
+- unauthorized model access
+- insecure model artifacts
+- leakage through logs
+
+Security should therefore be considered during data collection, training, deployment, and monitoring rather than added only after deployment.
+
+For generative AI, NIST provides a dedicated Generative AI Profile as a companion to AI RMF 1.0.
+
+Source: [NIST AI RMF Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence).
+
+---
+
+## 45. Research Methodology for My ML Projects
+
+Every serious experiment should record:
+
+### Research question
+What exactly am I trying to determine?
+
+### Hypothesis
+What do I expect to happen and why?
+
+### Dataset
+What data supports the experiment, and what are its limitations?
+
+### Baseline
+What is the simplest credible comparison?
+
+### Intervention
+What changed between baseline and proposed method?
+
+### Controlled variables
+What remained constant?
+
+### Evaluation
+Which metrics were selected and why?
+
+### Statistical reliability
+Are differences large enough to matter? Can uncertainty or variation across seeds/folds be reported?
+
+### Ablation
+Which component actually contributed to the improvement?
+
+### Error analysis
+Where does the model still fail?
+
+### Reproducibility
+Can another researcher recreate the experiment from the recorded configuration?
+
+---
+
+## 46. Ablation Studies
+
+An ablation removes or changes components of a proposed system to measure their contribution.
+
+Example:
+
+| Experiment | CNN | BiLSTM | Augmentation | Result |
+|---|---:|---:|---:|---:|
+| Baseline | ✓ | ✗ | ✗ | record |
+| + sequence model | ✓ | ✓ | ✗ | record |
+| + augmentation | ✓ | ✓ | ✓ | record |
+
+The purpose is not merely to show that the final model works; it is to determine which design choices matter.
+
+---
+
+## 47. Reproducibility Checklist
+
+Before calling an experiment complete, record:
+
+- [ ] Dataset source and version
+- [ ] License/usage constraints
+- [ ] Exact train/validation/test split
+- [ ] Preprocessing code
+- [ ] Augmentation policy
+- [ ] Model architecture
+- [ ] Hyperparameters
+- [ ] Optimizer and scheduler
+- [ ] Random seed(s)
+- [ ] Hardware/software environment
+- [ ] Training duration
+- [ ] Evaluation metrics
+- [ ] Confidence intervals or repeated-run variation where appropriate
+- [ ] Error analysis
+- [ ] Model artifact/version
+- [ ] Git commit
+
+---
+
+## 48. Project Research Mapping
 
 ### Autonomous AI Scientist
-Focus areas:
-- retrieval pipelines
-- scientific document processing
+
+Research areas:
+
+- scientific information retrieval
+- document parsing
+- embeddings
+- vector databases
 - RAG
-- LLM orchestration
-- source-aware generation
-- research workflow automation
+- LLM reasoning workflows
+- source attribution
+- evaluation of grounded generation
+- experiment reproducibility
 
 ### Animal Species Classification
-Focus areas:
-- CNNs
+
+Research areas:
+
+- CNN architectures
 - transfer learning
-- image augmentation
-- model comparison
+- augmentation
+- class imbalance
+- confusion matrices
 - Grad-CAM
-- classification metrics
+- model efficiency
+- cross-model comparison
 
 ### Energy Pricing / Demand Forecasting
-Focus areas:
-- time-series preprocessing
+
+Research areas:
+
+- temporal feature engineering
 - LSTM/GRU
-- temporal train/validation/test splits
-- forecasting metrics
-- sequence modeling
+- forecasting baselines
+- rolling evaluation
+- seasonality
+- distribution shift
+- peak-error analysis
 
 ### Silent Speech Decoder
-Focus areas:
-- computer vision
-- mouth-region extraction
-- 3D CNNs
-- BiLSTM sequence modeling
-- CTC loss
+
+Research areas:
+
+- visual speech recognition
+- mouth ROI extraction
+- 3D CNN
+- BiLSTM
+- CTC decoding
 - CER/WER
+- speaker-independent evaluation
 - real-time inference
 
 ---
 
-## 15. Coding and Learning Workflow
+## 49. Research Questions I Should Ask Before Publishing Results
 
-For each ML topic I study, I should be able to answer:
-
-1. **What problem does it solve?**
-2. **How does it work?**
-3. **What assumptions does it make?**
-4. **What are the common failure modes?**
-5. **How do I evaluate it?**
-6. **When would I choose it over an alternative?**
-7. **How would I deploy and monitor it?**
-8. **What did I learn by implementing it?**
-
-### Personal rule
-Do not count a topic as learned just because I can define it. I should be able to explain it, implement a small example, interpret results, identify failure modes, and connect it to a real project.
-
----
-
-## 16. Next Learning Priorities
-
-- Advanced model evaluation and statistical validation
-- Feature stores and reproducible feature pipelines
-- Experiment tracking and model versioning
-- Docker + CI/CD for ML services
-- Kubernetes fundamentals for ML workloads
-- Model optimization and quantization
-- LLM evaluation and RAG evaluation
-- Monitoring for data drift, concept drift, and model quality
-- Production system design for real-time ML
+1. Is the dataset representative of the intended deployment population?
+2. Could there be train/test leakage?
+3. Is the baseline strong and reproducible?
+4. Are comparisons made under the same data and evaluation protocol?
+5. Are hyperparameters tuned fairly?
+6. Has the test set been protected from iterative decisions?
+7. Are improvements statistically or practically meaningful?
+8. What failure cases remain?
+9. Does the model generalize across groups, environments, and time periods?
+10. Can the experiment be reproduced from the repository?
+11. Are model limitations clearly documented?
+12. Are claims supported by measurements rather than assumptions?
 
 ---
 
-*Part of my daily coding and machine-learning knowledge base.*
+## 50. Current Learning Priorities
+
+### Priority 1 — Strong ML fundamentals
+- probability and statistics
+- optimization
+- classical ML
+- evaluation
+- feature engineering
+- experimental design
+
+### Priority 2 — Deep learning
+- CNNs
+- sequence models
+- attention
+- transformers
+- transfer learning
+- representation learning
+
+### Priority 3 — LLM systems
+- tokenization
+- embeddings
+- RAG
+- fine-tuning
+- evaluation
+- agents
+- safety
+
+### Priority 4 — MLOps
+- experiment tracking
+- model registry
+- Docker
+- CI/CD
+- serving
+- monitoring
+- drift detection
+
+### Priority 5 — Research engineering
+- reproducible experiments
+- ablation studies
+- rigorous baselines
+- error analysis
+- documentation
+- responsible AI
+
+---
+
+# Trusted Research & Documentation Sources
+
+## Primary research papers
+
+1. Vaswani et al. (2017), **Attention Is All You Need** — https://arxiv.org/abs/1706.03762
+2. Devlin et al. (2018), **BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding** — https://arxiv.org/abs/1810.04805
+3. Lewis et al. (2020), **Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks** — https://arxiv.org/abs/2005.11401
+4. Selvaraju et al. (2017), **Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization** — https://arxiv.org/abs/1610.02391
+5. Kingma & Ba (2014), **Adam: A Method for Stochastic Optimization** — https://arxiv.org/abs/1412.6980
+6. Ioffe & Szegedy (2015), **Batch Normalization** — https://arxiv.org/abs/1502.03167
+7. Simonyan & Zisserman (2014), **Very Deep Convolutional Networks for Large-Scale Image Recognition** — https://arxiv.org/abs/1409.1556
+8. Szegedy et al. (2014), **Going Deeper with Convolutions** — https://arxiv.org/abs/1409.4842
+9. He et al. (2015), **Deep Residual Learning for Image Recognition** — https://arxiv.org/abs/1512.03385
+10. Huang et al. (2016), **Densely Connected Convolutional Networks** — https://arxiv.org/abs/1608.06993
+11. Tan & Le (2019), **EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks** — https://arxiv.org/abs/1905.11946
+12. Szegedy et al. (2016), **Inception-v4, Inception-ResNet and the Impact of Residual Connections** — https://arxiv.org/abs/1602.07261
+13. Zeiler & Fergus (2013), **Visualizing and Understanding Convolutional Networks** — https://arxiv.org/abs/1311.2901
+
+## Official technical documentation
+
+- scikit-learn — https://scikit-learn.org/stable/
+- TensorFlow — https://www.tensorflow.org/guide/basics
+- PyTorch — https://pytorch.org/tutorials/
+- PyTorch Autograd — https://docs.pytorch.org/tutorials/beginner/introyt/autogradyt_tutorial.html
+- Hugging Face Course — https://huggingface.co/learn/nlp-course/chapter1/1
+- MLflow — https://mlflow.org/docs/latest/
+
+## Government / standards / trustworthy AI
+
+- NIST AI Risk Management Framework — https://www.nist.gov/itl/ai-risk-management-framework
+- NIST AI RMF 1.0 — https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
+- NIST AI RMF Playbook — https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook
+- NIST Generative AI Profile — https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Practical ML engineering references
+
+- Google Machine Learning Crash Course — https://developers.google.com/machine-learning/crash-course
+- Google Production ML Systems — https://developers.google.com/machine-learning/crash-course/production-ml-systems
+- Google ML Fairness — https://developers.google.com/machine-learning/crash-course/fairness
+- Google Datasets, Generalization and Overfitting — https://developers.google.com/machine-learning/crash-course/overfitting
+- scikit-learn Cross-validation — https://scikit-learn.org/stable/modules/cross_validation.html
+- scikit-learn Metrics — https://scikit-learn.org/stable/modules/model_evaluation.html
+- scikit-learn Ensembles — https://scikit-learn.org/stable/modules/ensemble.html
+- MLflow Tracking — https://mlflow.org/docs/latest/ml/tracking/
+- MLflow Model Registry — https://mlflow.org/docs/latest/ml/model-registry/workflow/
+
+---
+
+## Research Integrity Note
+
+These notes are a learning document, not a substitute for reading the original papers or official documentation. For research claims, benchmark numbers, safety conclusions, or deployment decisions, consult the cited primary source and reproduce the relevant experiment where possible.
+
+**Rule for future updates:** new entries should include the concept, mechanism, assumptions, equations where useful, practical implementation considerations, failure modes, evaluation methodology, research references, and a clear distinction between established evidence and personal/project observations.
+
+---
+
+*Part of my daily coding and machine-learning research knowledge base.*
